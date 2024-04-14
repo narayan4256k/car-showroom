@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Loan Calculator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .calculator-container {
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .calculator-form {
+            display: grid;
+            grid-gap: 10px;
+        }
+        .calculator-form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .calculator-form input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .calculator-form button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .calculator-form button:hover {
+            background-color: #0056b3;
+        }
+        .calculator-result {
+            margin-top: 20px;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Car Loan Calculator</h1>
+        <form class="calculator-form" id="car-loan-form">
+            <label for="car-price">Car Price (₹):</label>
+            <input type="number" id="car-price" name="carPrice" required>
+            <label for="down-payment">Down Payment (₹):</label>
+            <input type="number" id="down-payment" name="downPayment" required>
+            <label for="interest-rate">Interest Rate (%):</label>
+            <input type="number" id="interest-rate" name="interestRate" required>
+            <label for="loan-term">Loan Term (Years):</label>
+            <input type="number" id="loan-term" name="loanTerm" required>
+            <button type="button" onclick="calculateCarCost()">Calculate Overall Cost</button>
+        </form>
+        <div class="calculator-result" id="total-cost"></div>
+    </div>
+
+    <script>
+        function calculateCarCost() {
+            const carPrice = parseFloat(document.getElementById('car-price').value);
+            const downPayment = parseFloat(document.getElementById('down-payment').value);
+            const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100;
+            const loanTerm = parseFloat(document.getElementById('loan-term').value);
+
+            const loanAmount = carPrice - downPayment;
+            const monthlyInterestRate = interestRate / 12;
+            const totalMonths = loanTerm * 12;
+
+            const monthlyEmi = loanAmount * (monthlyInterestRate * (1 + monthlyInterestRate) ** totalMonths) / ((1 + monthlyInterestRate) ** totalMonths - 1);
+            const totalCost = loanAmount + (monthlyEmi * totalMonths);
+
+            document.getElementById('total-cost').innerText = `Overall Car Cost: ₹${totalCost.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

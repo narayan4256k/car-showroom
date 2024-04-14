@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Us</title>
+    <link rel="stylesheet" href="ContactUs.css">
+</head>
+<style>
+    ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #33333300;
+            border-radius: 25px;
+        }
+.contact-container {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px;
+}
+
+.map-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.contact-form {
+    flex: 1;
+}
+
+.contact-form h1 {
+    margin-top: 0;
+}
+
+.success-message {
+    display: none;
+    color: green;
+}
+</style>
+<body> 
+    <ul>
+        <li><a href="./PortfolioWebsite New - Copy (2)/index.htm">Home</a></li>
+        
+        <li><a href="Homepage.html">Cars</a></li>
+        <li><a href="ContactUs.html">Contact Us</a></li>
+        <li><a href="calculater.html">Calculator</a></li>
+        <li><a href="compare.html">Compare Cars</a></li>
+        <li><a href="customer.html">Customer Review</a></li>
+    </ul>
+    <center><h1>Contact Us</h1></center>
+    <hr>
+    <div class="contact-container">
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.4677393709253!2d73.83345757465085!3d18.462460570947776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2956cff65e017%3A0xfd935d7335832834!2sSou.Venutai%20Chavan%20Polytechnic%20college!5e0!3m2!1sen!2sin!4v1709968281406!5m2!1sen!2sin" width="800" height="600" style="border: 5px solid rgb(0, 246, 254);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="contact-form">
+            <h1>Contact Form</h1>
+            <form id="contactForm" method="POST" action="send_email.php">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" minlength="20" required></textarea>
+                <input type="submit" value="Send Message">
+            </form>
+            <div class="success-message" id="successMessage">Submitted successfully!</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Validate message length
+            var message = document.getElementsByName('message')[0].value;
+            if (message.length < 20) {
+                alert("Message must be at least 20 characters long.");
+                return;
+            }
+            
+            // Display success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Remove the form after submission
+            document.getElementById('contactForm').reset(); // Reset form fields
+            document.getElementById('contactForm').style.display = 'none';
+        });
+    </script>
+
+</body>
+</html>
